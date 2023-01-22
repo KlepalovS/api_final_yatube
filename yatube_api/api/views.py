@@ -1,5 +1,3 @@
-from django.core.exceptions import PermissionDenied
-
 from rest_framework import filters, permissions, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.pagination import LimitOffsetPagination
@@ -8,23 +6,7 @@ from api.permissions import IsAuthorOrReadOnlyPermission
 from api.serializers import (
     CommentSerializer, FollowSerializer, GroupSerializer, PostSerializer
 )
-from posts.models import Follow, Group, Post
-
-
-class CustomBaseViewSet(viewsets.ModelViewSet):
-    """Кастомный базовый вьюсет с переназначенными методами update, destroy."""
-
-    def perform_update(self, serializer):
-        """Переопределяем метод update."""
-        if self.get_object().author != self.request.user:
-            raise PermissionDenied('Чужой контент изменять нельзя!')
-        serializer.save()
-
-    def destroy(self, request, *args, **kwargs):
-        """Переопределяем метод destroy."""
-        if self.get_object().author != self.request.user:
-            raise PermissionDenied('Чужой контент удалять нельзя!')
-        return super(CustomBaseViewSet, self).destroy(request, *args, **kwargs)
+from posts.models import Group, Post
 
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
@@ -34,7 +16,7 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = GroupSerializer
 
 
-class PostViewSet(CustomBaseViewSet):
+class PostViewSet(viewsets.ModelViewSet):
     """Вьюсет для модели Post."""
 
     queryset = Post.objects.all()
@@ -47,7 +29,7 @@ class PostViewSet(CustomBaseViewSet):
         serializer.save(author=self.request.user)
 
 
-class CommentViewSet(CustomBaseViewSet):
+class CommentViewSet(viewsets.ModelViewSet):
     """Вьюсет для модели Comment."""
 
     serializer_class = CommentSerializer
@@ -65,7 +47,7 @@ class CommentViewSet(CustomBaseViewSet):
         serializer.save(post=self.get_post(), author=self.request.user)
 
 
-class FollowViewSet(CustomBaseViewSet):
+class FollowViewSet(viewsets.ModelViewSet):
     """Вьюсет для модели Follow."""
 
     serializer_class = FollowSerializer
@@ -75,7 +57,7 @@ class FollowViewSet(CustomBaseViewSet):
 
     def get_queryset(self):
         """Получаем queryset для конкретного юзера."""
-        return Follow.objects.filter(user=self.request.user)
+        return self.request.user.follower.all()
 
     def perform_create(self, serializer):
         """Переопределяем метод create."""

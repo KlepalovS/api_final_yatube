@@ -10,6 +10,13 @@
 * Комментировать, смотреть, удалять и обновлять комментарии.
 * Фильтровать по полям.
 
+### Используемые в проекте технологии:
+![python](https://img.shields.io/badge/Python-100000?style=for-the-badge&logo=python&logoColor=white) ![django](https://img.shields.io/badge/django-100000?style=for-the-badge&logo=django&logoColor=white) ![django rest](https://img.shields.io/badge/django%20rest-100000?style=for-the-badge&logo=django&logoColor=white) ![sqlite](https://img.shields.io/badge/SQLite-100000?style=for-the-badge&logo=sqlite&logoColor=white) ![github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white) ![vscode](https://img.shields.io/badge/VSCode-100000?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
+
+### Автор - Вячеслав Клепалов.
+Мои социальные сети:
+[![telegram](https://img.shields.io/badge/Telegram-100000?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/prived_medved) [![whatsapp](https://img.shields.io/badge/WhatsApp-100000?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/79123071758) [![github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/KlepalovS)
+
 ## Установка 
 Клонируем репозиторий на локальную машину:
 
