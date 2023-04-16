@@ -10,3 +10,4 @@ requests==2.26.0
 djoser
 flake8
 isort
+python-dotenv
